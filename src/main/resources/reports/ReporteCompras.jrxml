@@ -1,0 +1,347 @@
+<!-- Created with Jaspersoft Studio version 7.0.3.final using JasperReports Library version 7.0.3-41034ca841d452f3305ba55b9042260aaa1ab5dd  -->
+<jasperReport name="ReporteCompras" language="java" columnCount="1" pageWidth="595" pageHeight="842" orientation="Landscape" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="73156f04-509e-40c5-8e46-14575a80e3db">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="BaseDeDatos"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w1" value="540"/>
+	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w2" value="446"/>
+	<parameter name="purchase_id" class="java.lang.Integer"/>
+	<query language="SQL"><![CDATA[SELECT 
+    p.purchase_id,
+    p.purchase_date,
+    p.total_cost,
+    p.status,
+    s.supplier_name,
+    u.name || ' ' || u.last_name as employee_name,
+    pd.quantity,
+    pd.unit_cost,
+    pd.total_cost as detail_total,
+    pr.name as product_name,
+    pr.description as product_description,
+    pr.product_id
+FROM lorenzo_campos.purchase p
+INNER JOIN lorenzo_campos.supplier s ON p.supplier_id = s.supplier_id
+INNER JOIN maria_sulca.users u ON p.employee_id = u.user_id
+INNER JOIN lorenzo_campos.purchase_detail pd ON p.purchase_id = pd.purchase_id
+INNER JOIN lorenzo_campos.product pr ON pd.product_id = pr.product_id
+WHERE p.purchase_id = $P{purchase_id}
+ORDER BY pd.purchase_detail_id]]></query>
+	<field name="PURCHASE_ID" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="PURCHASE_ID"/>
+		<property name="com.jaspersoft.studio.field.label" value="PURCHASE_ID"/>
+	</field>
+	<field name="PURCHASE_DATE" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.name" value="PURCHASE_DATE"/>
+		<property name="com.jaspersoft.studio.field.label" value="PURCHASE_DATE"/>
+	</field>
+	<field name="TOTAL_COST" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="TOTAL_COST"/>
+		<property name="com.jaspersoft.studio.field.label" value="TOTAL_COST"/>
+	</field>
+	<field name="STATUS" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="STATUS"/>
+		<property name="com.jaspersoft.studio.field.label" value="STATUS"/>
+	</field>
+	<field name="SUPPLIER_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="SUPPLIER_NAME"/>
+		<property name="com.jaspersoft.studio.field.label" value="SUPPLIER_NAME"/>
+	</field>
+	<field name="EMPLOYEE_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="EMPLOYEE_NAME"/>
+		<property name="com.jaspersoft.studio.field.label" value="EMPLOYEE_NAME"/>
+	</field>
+	<field name="QUANTITY" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="QUANTITY"/>
+		<property name="com.jaspersoft.studio.field.label" value="QUANTITY"/>
+	</field>
+	<field name="UNIT_COST" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="UNIT_COST"/>
+		<property name="com.jaspersoft.studio.field.label" value="UNIT_COST"/>
+	</field>
+	<field name="DETAIL_TOTAL" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="DETAIL_TOTAL"/>
+		<property name="com.jaspersoft.studio.field.label" value="DETAIL_TOTAL"/>
+	</field>
+	<field name="PRODUCT_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="PRODUCT_NAME"/>
+		<property name="com.jaspersoft.studio.field.label" value="PRODUCT_NAME"/>
+	</field>
+	<field name="PRODUCT_DESCRIPTION" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="PRODUCT_DESCRIPTION"/>
+		<property name="com.jaspersoft.studio.field.label" value="PRODUCT_DESCRIPTION"/>
+	</field>
+	<field name="PRODUCT_ID" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="PRODUCT_ID"/>
+		<property name="com.jaspersoft.studio.field.label" value="PRODUCT_ID"/>
+	</field>
+	<background splitType="Stretch"/>
+	<pageHeader height="122" splitType="Stretch">
+		<element kind="staticText" uuid="d4c6ad0f-bc62-47f8-917d-af3f49bc6487" x="0" y="10" width="555" height="20" fontSize="14.0" bold="true" hTextAlign="Center">
+			<text><![CDATA[Listado de compras realizadas]]></text>
+			<property name="com.jaspersoft.studio.unit.x" value="px"/>
+			<property name="com.jaspersoft.studio.unit.y" value="px"/>
+			<property name="com.jaspersoft.studio.unit.width" value="px"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</element>
+		<element kind="staticText" uuid="2b575c01-aa78-4035-ac31-4bd69a46edba" x="20" y="40" width="40" height="15" bold="true">
+			<text><![CDATA[Fecha:]]></text>
+			<property name="com.jaspersoft.studio.unit.x" value="px"/>
+			<property name="com.jaspersoft.studio.unit.y" value="px"/>
+			<property name="com.jaspersoft.studio.unit.width" value="px"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</element>
+		<element kind="textField" uuid="e0f3ae05-34b1-42cb-b8d1-2a3f892632c8" x="65" y="40" width="120" height="15">
+			<expression><![CDATA[new java.text.SimpleDateFormat("dd/MM/yyyy").format($F{PURCHASE_DATE})
+]]></expression>
+			<property name="com.jaspersoft.studio.unit.y" value="px"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<property name="com.jaspersoft.studio.unit.x" value="px"/>
+			<property name="com.jaspersoft.studio.unit.width" value="px"/>
+		</element>
+		<element kind="staticText" uuid="ce2f9d0c-272d-4682-a975-b4ab4d11121b" x="20" y="58" width="100" height="15" markup="none" bold="true">
+			<text><![CDATA[Número de Compra:]]></text>
+			<property name="com.jaspersoft.studio.unit.x" value="px"/>
+			<property name="com.jaspersoft.studio.unit.y" value="px"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</element>
+		<element kind="textField" uuid="1faded79-0794-4c5e-bf42-25a384dfaa35" x="125" y="58" width="60" height="15">
+			<expression><![CDATA[($F{PURCHASE_ID}.compareTo(new java.math.BigDecimal(10)) < 0 ? "000" :
+ $F{PURCHASE_ID}.compareTo(new java.math.BigDecimal(100)) < 0 ? "00" :
+ $F{PURCHASE_ID}.compareTo(new java.math.BigDecimal(1000)) < 0 ? "0" : "") 
++ $F{PURCHASE_ID}.toString()
+]]></expression>
+			<property name="com.jaspersoft.studio.unit.x" value="px"/>
+			<property name="com.jaspersoft.studio.unit.y" value="px"/>
+			<property name="com.jaspersoft.studio.unit.width" value="px"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</element>
+		<element kind="staticText" uuid="3eb1bd35-b538-406e-95d5-41cead3da16f" x="20" y="76" width="60" height="15" bold="true">
+			<text><![CDATA[Proveedor:]]></text>
+			<property name="com.jaspersoft.studio.unit.y" value="px"/>
+			<property name="com.jaspersoft.studio.unit.x" value="px"/>
+			<property name="com.jaspersoft.studio.unit.width" value="px"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</element>
+		<element kind="textField" uuid="86991090-d794-4d15-b46d-e088ba02be75" x="85" y="76" width="150" height="15">
+			<expression><![CDATA[$F{SUPPLIER_NAME}]]></expression>
+			<property name="com.jaspersoft.studio.unit.x" value="px"/>
+			<property name="com.jaspersoft.studio.unit.y" value="px"/>
+			<property name="com.jaspersoft.studio.unit.width" value="px"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</element>
+		<element kind="staticText" uuid="6c346992-22c8-41b5-985e-3b501f2dbc12" x="350" y="40" width="45" height="15" bold="true">
+			<text><![CDATA[Estado:]]></text>
+			<property name="com.jaspersoft.studio.unit.x" value="px"/>
+			<property name="com.jaspersoft.studio.unit.y" value="px"/>
+			<property name="com.jaspersoft.studio.unit.width" value="px"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</element>
+		<element kind="textField" uuid="3045a52c-9b37-46fb-b1ac-50d817970cd0" x="400" y="40" width="135" height="15">
+			<expression><![CDATA[$F{STATUS}]]></expression>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="cf019bb5-ba71-4d3f-aad1-7c6e6c36da71"/>
+			<property name="com.jaspersoft.studio.unit.y" value="px"/>
+			<property name="com.jaspersoft.studio.unit.width" value="px"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</element>
+		<element kind="staticText" uuid="87b23a80-d978-4d21-aa8e-1d795f282a50" x="350" y="58" width="60" height="15" bold="true">
+			<text><![CDATA[Empleado:]]></text>
+			<property name="com.jaspersoft.studio.unit.x" value="px"/>
+			<property name="com.jaspersoft.studio.unit.y" value="px"/>
+			<property name="com.jaspersoft.studio.unit.width" value="px"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</element>
+		<element kind="textField" uuid="00c51bbb-22b4-4ee1-9dec-c5a51e0659d2" x="415" y="58" width="120" height="15">
+			<expression><![CDATA[$F{EMPLOYEE_NAME}]]></expression>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="6fee4d93-96f3-4d2d-af4c-264413cc2ff5"/>
+			<property name="com.jaspersoft.studio.unit.x" value="px"/>
+			<property name="com.jaspersoft.studio.unit.width" value="px"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</element>
+		<element kind="staticText" uuid="6f02d920-04e5-4cd5-b169-b3bbdbefea1d" x="350" y="76" width="35" height="15" bold="true">
+			<text><![CDATA[Total:]]></text>
+			<property name="com.jaspersoft.studio.unit.x" value="px"/>
+			<property name="com.jaspersoft.studio.unit.y" value="px"/>
+			<property name="com.jaspersoft.studio.unit.width" value="px"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</element>
+		<element kind="textField" uuid="016505e1-bd0f-4254-bd4d-917fbc29cf8a" x="390" y="76" width="145" height="15">
+			<expression><![CDATA["S/. " + new java.text.DecimalFormat("#,##0.00").format($F{TOTAL_COST})]]></expression>
+			<property name="com.jaspersoft.studio.unit.x" value="px"/>
+			<property name="com.jaspersoft.studio.unit.y" value="px"/>
+			<property name="com.jaspersoft.studio.unit.width" value="px"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</element>
+		<element kind="line" uuid="5575bafb-5ae5-466b-9220-6cbb69d4b973" x="0" y="110" width="555" height="1">
+			<property name="com.jaspersoft.studio.unit.x" value="px"/>
+			<property name="com.jaspersoft.studio.unit.y" value="px"/>
+			<property name="com.jaspersoft.studio.unit.width" value="px"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</element>
+		<property name="com.jaspersoft.studio.unit.height" value="px"/>
+	</pageHeader>
+	<columnHeader height="35" splitType="Stretch">
+		<element kind="staticText" uuid="9aa43f35-1133-4820-bcb4-74a2e42302a2" x="0" y="5" width="60" height="15" backcolor="#F0F0F0" bold="true" vTextAlign="Top">
+			<text><![CDATA[Detalle]]></text>
+			<property name="com.jaspersoft.studio.unit.x" value="px"/>
+			<property name="com.jaspersoft.studio.unit.y" value="px"/>
+			<property name="com.jaspersoft.studio.unit.width" value="px"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</element>
+		<element kind="staticText" uuid="2c1cc399-5bdb-4a1b-bc4a-2fcb0fc667cf" x="0" y="20" width="45" height="15" backcolor="#F0F0F0" markup="none" fontSize="8.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Prod.]]></text>
+			<property name="com.jaspersoft.studio.unit.x" value="px"/>
+			<property name="com.jaspersoft.studio.unit.y" value="px"/>
+			<property name="com.jaspersoft.studio.unit.width" value="px"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<box padding="0">
+				<pen lineWidth="1.0"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="9187936f-698a-4e75-9937-3a79590e6dd2" x="45" y="20" width="195" height="15" backcolor="#F0F0F0" fontSize="8.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Descripción]]></text>
+			<property name="com.jaspersoft.studio.unit.x" value="px"/>
+			<property name="com.jaspersoft.studio.unit.y" value="px"/>
+			<property name="com.jaspersoft.studio.unit.width" value="px"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<box padding="0">
+				<pen lineWidth="1.0"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="30d6c63f-3265-4be4-b568-af0824998f95" x="240" y="20" width="65" height="15" backcolor="#F0F0F0" markup="none" fontSize="8.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Cantidad]]></text>
+			<property name="com.jaspersoft.studio.unit.x" value="px"/>
+			<property name="com.jaspersoft.studio.unit.y" value="px"/>
+			<property name="com.jaspersoft.studio.unit.width" value="px"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<box padding="0">
+				<pen lineWidth="1.0"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="117c1342-e9c6-4060-a080-1b90dfef1612" x="305" y="20" width="83" height="15" fontSize="8.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Prec. Unit.]]></text>
+			<property name="com.jaspersoft.studio.unit.width" value="px"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<property name="com.jaspersoft.studio.unit.x" value="px"/>
+			<property name="com.jaspersoft.studio.unit.y" value="px"/>
+			<box>
+				<pen lineWidth="1.0"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="c91bc315-ad27-4d4b-92f0-071ae735d310" x="388" y="20" width="83" height="15" fontSize="8.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Costo Unit.]]></text>
+			<property name="com.jaspersoft.studio.unit.x" value="px"/>
+			<property name="com.jaspersoft.studio.unit.y" value="px"/>
+			<property name="com.jaspersoft.studio.unit.width" value="px"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<box>
+				<pen lineWidth="1.0"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="56c63d20-d796-421b-a481-5303fa21a597" x="471" y="20" width="84" height="15" fontSize="8.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Subtot.]]></text>
+			<property name="com.jaspersoft.studio.unit.x" value="px"/>
+			<property name="com.jaspersoft.studio.unit.y" value="px"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<property name="com.jaspersoft.studio.unit.width" value="px"/>
+			<box>
+				<pen lineWidth="1.0"/>
+			</box>
+		</element>
+		<property name="com.jaspersoft.studio.unit.height" value="px"/>
+	</columnHeader>
+	<detail>
+		<band height="34" splitType="Stretch">
+			<element kind="textField" uuid="c4225f75-0688-4cdf-8cc0-d44d6037c1d8" x="0" y="0" width="45" height="20" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[String.format("%03d", $F{PRODUCT_ID}.intValue())
+]]></expression>
+				<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				<box>
+					<pen lineWidth="1.0"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="eb418c2f-f94c-46b9-80f9-b74e9d1a27d5" x="45" y="0" width="195" height="20" fontSize="8.0" hTextAlign="Left" vTextAlign="Middle">
+				<expression><![CDATA[$F{PRODUCT_NAME} + " - " + $F{PRODUCT_DESCRIPTION}]]></expression>
+				<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				<box>
+					<pen lineWidth="1.0"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="fb71cc13-d558-4eb6-a79f-1fd2fe38c902" x="240" y="0" width="65" height="20" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$F{QUANTITY}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="3c69bd84-b0a5-4ca6-8f78-c4a16a80d10d"/>
+				<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				<box>
+					<pen lineWidth="1.0"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="48a25118-c934-4482-835e-0a0badbed5fb" x="305" y="0" width="83" height="20" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA["S/. " + new java.text.DecimalFormat("#,##0.00").format($F{UNIT_COST})]]></expression>
+				<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				<box>
+					<pen lineWidth="1.0"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="b61a5e4b-5302-467c-928a-df69f579c7a2" x="388" y="0" width="83" height="20" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA["S/. " + new java.text.DecimalFormat("#,##0.00").format($F{UNIT_COST})]]></expression>
+				<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				<box>
+					<pen lineWidth="1.0"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="f0b344f7-91e7-408e-a667-416f66ec48e2" x="471" y="0" width="84" height="20" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA["S/. " + new java.text.DecimalFormat("#,##0.00").format($V{REPORT_COUNT} > 0 ? $F{TOTAL_COST} : 0)]]></expression>
+				<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				<box>
+					<pen lineWidth="1.0"/>
+				</box>
+			</element>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</band>
+	</detail>
+	<columnFooter height="25" splitType="Stretch">
+		<element kind="staticText" uuid="ddabff77-2001-4e64-bfbd-0601ea02cc13" x="350" y="5" width="80" height="15" bold="true">
+			<text><![CDATA[Total a Pagar:]]></text>
+			<property name="com.jaspersoft.studio.unit.x" value="px"/>
+			<property name="com.jaspersoft.studio.unit.y" value="px"/>
+			<property name="com.jaspersoft.studio.unit.width" value="px"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</element>
+		<element kind="textField" uuid="005e3ded-4e70-4968-bd87-e8c9cfecdb6b" x="435" y="5" width="120" height="15" bold="true">
+			<expression><![CDATA["S/. " + new java.text.DecimalFormat("#,##0.00").format($V{REPORT_COUNT} > 0 ? $F{TOTAL_COST} : 0)]]></expression>
+			<property name="com.jaspersoft.studio.unit.x" value="px"/>
+			<property name="com.jaspersoft.studio.unit.y" value="px"/>
+			<property name="com.jaspersoft.studio.unit.width" value="px"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</element>
+		<property name="com.jaspersoft.studio.unit.height" value="px"/>
+	</columnFooter>
+	<pageFooter splitType="Stretch">
+		<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+	</pageFooter>
+</jasperReport>

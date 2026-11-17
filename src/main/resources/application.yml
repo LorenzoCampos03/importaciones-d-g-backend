@@ -1,0 +1,36 @@
+server:
+     port: 8080
+
+spring:
+     datasource:
+          url: jdbc:oracle:thin:@importacionesdg_tpurgent?TNS_ADMIN=${TNS_ADMIN:src/main/Wallet_ImportacionesDG}
+          username: ${DATABASE_USERNAME:LORENZO_CAMPOS}
+          password: ${DATABASE_PASSWORD:userLorenzo_02}
+          driver-class-name: oracle.jdbc.OracleDriver
+     jpa:
+          database-platform: org.hibernate.dialect.OracleDialect
+          hibernate:
+               ddl-auto: none
+          show-sql: true
+
+logging:
+     level:
+          org:
+               hibernate:
+                    SQL: DEBUG
+                    type:
+                         descriptor:
+                              sql: trace
+
+springdoc:
+     api-docs:
+          enabled: true
+     swagger-ui:
+          path: /swagger-ui/index.html
+          enabled: true
+
+# JWT Configuration
+jwt:
+     secret: mySecretKey123456789012345678901234567890
+     expiration: 3600000 # 1 hora en milisegundos (access token)
+     refresh-expiration: 604800000 # 7 días en milisegundos (refresh token)
